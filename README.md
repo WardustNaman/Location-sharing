@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -32,3 +33,6 @@ postgres
 * Deployment instructions
 
 * ...
+=======
+# Location-sharing
+>>>>>>> ce24c77fa820f0f95e43cc24fc1073b9d62c3113

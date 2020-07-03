@@ -1,0 +1,25 @@
+<H2> Other's location </H2> 
+<% if !@locationsShared.empty? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>S No.</th>
+        <!-- <th>User</th> -->
+        <th>X-axis</th>
+        <th>Y-axis</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead> 
+    <tbody>
+      <tr>
+        <% @locationsShared.each_with_index do |local, index| %>
+        <td scope="row"><%= index + 1 %></td>
+        <!-- <td><%#= local.user_id %></td> -->
+        <td><%= local.x_axis %></td>
+        <td><%= local.y_axis %></td>
+        <td><%= link_to 'Show', local %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<div id="map">
+  <!-- Your map will be shown inside this div-->
+ </div>
+<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+<!-- Openlayesr JS fIle -->
+ <!-- Our map file -->
+
+ <div id="display">
+ </div>
+
+
+<p>
+  <strong>X axis:</strong>
+  <%= @location.x_axis %>
+</p>
+
+<p>
+  <strong>Y axis:</strong>
+  <%= @location.y_axis %>
+</p>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
+
+
+<script type="text/javascript">
+window.onload = init;
+function init(){
+var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([0,0]),
+          zoom: 1 //Initial Zoom Level
+        })
+        
+      });
+    }
+</script>

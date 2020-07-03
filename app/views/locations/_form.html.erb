@@ -1,0 +1,79 @@
+<div id="map">
+  <!-- Your map will be shown inside this div-->
+ </div>
+</body>
+<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+ <!-- Openlayesr JS fIle -->
+ <!-- Our map file -->
+
+ <div id="display">
+ </div>
+
+
+
+
+
+<%= form_with(model: location, local: true) do |form| %>
+  <% if location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</br>
+
+
+  <label for="status_id">Status : </label> <br/>
+<%= form.collection_select :status_id, Status.all, :id, :name, prompt: "Select Status" %> <br/>
+
+
+  <div class="field">
+    <%= form.label :x_axis %>
+    <%= form.text_field :x_axis, :id => 'x_axis' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :y_axis %>
+    <%= form.text_field :y_axis, :id => 'y_axis' %>
+  </div>
+</br>
+<h4>Select Users </h4>
+  <% @users.each do |user| %>
+      <div class="field">
+      <label class="form-label"><%= check_box_tag "user_ids[]", user.id, :id => "user_ids_#{user.id}" %><%= user.email %></label>
+    </div>
+    <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+window.onload = init;
+function init(){
+var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([0,0]),
+          zoom: 1 //Initial Zoom Level
+        })
+        
+      });
+    map.on('click', function(e){
+            console.log(e.coordinate);
+            document.getElementById('x_axis').value = e.coordinate[0];
+            document.getElementById('y_axis').value = e.coordinate[1];
+        })
+    }
+</script>
